@@ -45,37 +45,44 @@ class TicTacToe:
                 self.current_player = "X"
 
     def best_move(self):
-        # 1. Перевірка на перемогу комп'ютера
-        for i in range(9):
-            if self.board[i] == "":
-                self.board[i] = "O"
-                if self.check_winner():
+        # З ймовірністю 70% комп'ютер грає "розумно", інакше випадково
+        if random.random() < 0.7:
+            # 1. Перевірка на перемогу комп'ютера
+            for i in range(9):
+                if self.board[i] == "":
+                    self.board[i] = "O"
+                    if self.check_winner():
+                        self.board[i] = ""
+                        return i
                     self.board[i] = ""
-                    return i
-                self.board[i] = ""
 
-        # 2. Блокування перемоги гравця
-        for i in range(9):
-            if self.board[i] == "":
-                self.board[i] = "X"
-                if self.check_winner():
+            # 2. Блокування перемоги гравця
+            for i in range(9):
+                if self.board[i] == "":
+                    self.board[i] = "X"
+                    if self.check_winner():
+                        self.board[i] = ""
+                        return i
                     self.board[i] = ""
+
+            # 3. Вибір центру
+            if self.board[4] == "":
+                return 4
+
+            # 4. Вибір кутів
+            for i in [0, 2, 6, 8]:
+                if self.board[i] == "":
                     return i
-                self.board[i] = ""
 
-        # 3. Вибір центру
-        if self.board[4] == "":
-            return 4
-
-        # 4. Вибір кутів
-        for i in [0, 2, 6, 8]:
-            if self.board[i] == "":
-                return i
-
-        # 5. Вибір сторін
-        for i in [1, 3, 5, 7]:
-            if self.board[i] == "":
-                return i
+            # 5. Вибір сторін
+            for i in [1, 3, 5, 7]:
+                if self.board[i] == "":
+                    return i
+        else:
+            # Випадковий хід
+            empty = [i for i, val in enumerate(self.board) if val == ""]
+            if empty:
+                return random.choice(empty)
 
         return None
 
