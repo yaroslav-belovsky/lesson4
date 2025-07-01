@@ -22,7 +22,7 @@ while True:
         elif i == " ":
             prob += 1
             if pos != start:
-                print(text[start:pos], '!!!', start, pos)
+                print(text[start:pos])
                 sl += 1
             start = pos + 1
         elif i == "`" or i == "~" or i == "<" or i == ">" or i == "." or i == "," or i == "?" or i == "!" or i == "(" or i == ")" or i == "/" or i == "\\" or i == "*" or i == "-" or i == "+":
