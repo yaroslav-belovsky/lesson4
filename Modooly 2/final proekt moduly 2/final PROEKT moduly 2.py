@@ -1,9 +1,12 @@
 pruholosni = ["б", "в", "г", "ґ", "д", "ж", "з", "й", "к", "л", "м", "н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ"]
 holosni = ["а", "о", "у", "е", "и", "і", "я", "ю", "є", "ї"]
 
-def save(content):
+def save(content, echo = True):
     with open("istoria", "a", encoding="UTF-8") as fp:
-        fp.write(str(content))
+        fp.write(f"{content}\n")
+        if echo:
+            print(content)
+
 
 def open_histori():
     with open("istoria", "r", encoding="UTF-8") as fp:
@@ -26,7 +29,7 @@ while True:
     if text == "1 ":
         open_histori()
         continue
-    save(f"{text}\n")
+    save(text,False)
     if text == " ":
         print("ти нічого не написав")
         continue
@@ -40,8 +43,7 @@ while True:
             if pos != start:
                 if pos - start >= 5:
                     lit_5 += 1
-                print(text[start:pos])
-                save(f"{text[start:pos]}\n")
+                save(text[start:pos])
                 sl += 1
             start = pos + 1
         elif i == "`" or i == "~" or i == "<" or i == ">" or i == "." or i == "," or i == "?" or i == "!" or i == "(" or i == ")" or i == "/" or i == "\\" or i == "*" or i == "-" or i == "+":
@@ -51,14 +53,6 @@ while True:
         else:
             inha_mowa += 1
         pos += 1
-    print(f"слів: {sl}")
-    print(f"приголосниг: {prh}")
-    print(f"голосних: {hol}")
-    print(f"пробілів: {prob}")
-    print(f"символів: {sumwol}")
-    print(f"символів і літер іншої мови: {inha_mowa}")
-    print(f"цифр: {cufru}")
-    print(f"слів в яких 5 і більше літер: {lit_5}")
     save_this = (
         f"слів: {sl}\n"
         f"приголосниг: {prh}\n"
