@@ -1,5 +1,16 @@
 pruholosni = ["б", "в", "г", "ґ", "д", "ж", "з", "й", "к", "л", "м", "н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ"]
 holosni = ["а", "о", "у", "е", "и", "і", "я", "ю", "є", "ї"]
+
+def save(content):
+    with open("istoria", "a", encoding="UTF-8") as fp:
+        fp.write(str(content))
+
+def open_histori():
+    with open("istoria", "r", encoding="UTF-8") as fp:
+        info = fp.read()
+        print("історія:")
+        print(info, "\n")
+
 while True:
     prh = 0
     hol = 0
@@ -10,36 +21,27 @@ while True:
     pos = 0
     start = 0
     sl = 0
-    lit = 0
     lit_5 = 0
-    text = str(input("1:історія\nнапиши текст українською: ") + ' ')
-    with open("istoria", "a", encoding="UTF-8") as fp:
-        fp.write(f"{text}\n")
-    if text == "1":
-        with open("istoria", "r", encoding="UTF-8") as fp:
-            info = fp.read()
-            print("історія:")
-            print(info, "\n")
-            continue
+    text = str(input("1: історія\nнапиши текст українською: ") + ' ')
+    if text == "1 ":
+        open_histori()
+        continue
+    save(f"{text}\n")
     if text == " ":
         print("ти нічого не написав")
         continue
     for i in text:
         if i.lower() in pruholosni:
             prh += 1
-            lit += 1
         elif i.lower() in holosni:
             hol += 1
-            lit += 1
         elif i == " ":
             prob += 1
             if pos != start:
-                if lit >= 5:
+                if pos - start >= 5:
                     lit_5 += 1
-                    lit = 0
                 print(text[start:pos])
-                with open("istoria", "a", encoding="UTF-8") as fp:
-                    fp.write(f"{text[start:pos]}\n")
+                save(f"{text[start:pos]}\n")
                 sl += 1
             start = pos + 1
         elif i == "`" or i == "~" or i == "<" or i == ">" or i == "." or i == "," or i == "?" or i == "!" or i == "(" or i == ")" or i == "/" or i == "\\" or i == "*" or i == "-" or i == "+":
@@ -57,14 +59,18 @@ while True:
     print(f"символів і літер іншої мови: {inha_mowa}")
     print(f"цифр: {cufru}")
     print(f"слів в яких 5 і більше літер: {lit_5}")
-    with open("istoria", "a", encoding="UTF-8") as fp:
-        fp.write(str(f"слів: {sl}\n"))
-        fp.write(str(f"приголосниг: {prh}\n"))
-        fp.write(str(f"голосних: {hol}\n"))
-        fp.write(str(f"пробілів: {prob}\n"))
-        fp.write(str(f"символів: {sumwol}\n"))
-        fp.write(str(f"символів і літер іншої мови: {inha_mowa}\n"))
-        fp.write(str(f"цифр: {cufru}\n"))
+    save_this = (
+        f"слів: {sl}\n"
+        f"приголосниг: {prh}\n"
+        f"голосних: {hol}\n"
+        f"пробілів: {prob}\n"
+        f"символів: {sumwol}\n"
+        f"символів і літер іншої мови: {inha_mowa}\n"
+        f"цифр: {cufru}\n"
+        f"слів в яких 5 і більше літер: {lit_5}"
+    )
+    save(save_this)
+
 
 
 
