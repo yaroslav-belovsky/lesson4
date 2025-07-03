@@ -1,9 +1,8 @@
+from library_spraw import pokazatu_wmist
 while True:
     wubir = int(input("натисни: 1: показати всі справи;\n         2:додати нову справу;\n         3:очистити всі справи;\n         4:вийти з програми;\n         5:видалити рядок за номером;\n"))
     if wubir == 1:
-        with open("sprawu", "r", encoding="UTF-8") as fp:
-            info = fp.read()
-            print(info)
+        pokazatu_wmist()
     if wubir == 2:
         with open("sprawu", "a", encoding="UTF-8") as fp:
             widpowid = input("яку справу додати: ")
@@ -15,22 +14,16 @@ while True:
     if wubir == 4:
         break
     if wubir == 5:
-        with open("sprawu", "r", encoding="UTF-8") as fp:
-            info = fp.read()
-            print(f"що з цьго видаляти?\n\n{info}")
-            wubir = int(input("який рядок видалити? напиши цифру того який хочеш видалити: "))
+        print("Що з цього видаляти?")
+        sprawu = pokazatu_wmist()
+        wubir = int(input("який рядок видалити? напиши цифру того який хочеш видалити: "))-1
 
-        with open("sprawu", "r", encoding="UTF-8") as fp:
-            sprawu = fp.readlines()
-            wudalutu = sprawu[wubir]
+        wudalutu = sprawu[wubir]
+        sprawu.remove(wudalutu)
 
-
-        with open("sprawu", "w") as fp:
-            sprawu.remove(wudalutu)
-
-        with open("sprawu", "a", encoding="UTF-8") as fw:
+        with open("sprawu", "w", encoding="UTF-8") as fw:
             s = ""
             for i in sprawu:
-                s += i + "\n"
+                s += i
             fw.write(s)
 
