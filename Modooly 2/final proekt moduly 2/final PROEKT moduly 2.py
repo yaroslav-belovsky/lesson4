@@ -1,71 +1,35 @@
-pruholosni = ["б", "в", "г", "ґ", "д", "ж", "з", "й", "к", "л", "м", "н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ"]
-holosni = ["а", "о", "у", "е", "и", "і", "я", "ю", "є", "ї"]
+import librori_to_final_proekt as l
 
-def save(content, echo = True):
-    with open("istoria", "a", encoding="UTF-8") as fp:
-        fp.write(f"{content}\n")
-        if echo:
-            print(content)
+try:
 
+    while True:
 
-def open_histori():
-    with open("istoria", "r", encoding="UTF-8") as fp:
-        info = fp.read()
-        print("історія:")
-        print(info, "\n")
+        menu = int(input("1: історія;     2: розбір речення з консолі     3: пошук слів заданої довжини з консолі     4:розібрати файл\n"))
+        if menu == 1:
+            l.open_histori()
+            continue
+        if menu == 2:
+            text = str(input("напиши текст українською: ") + ' ')
+            l.save(text, False)
 
-while True:
-    prh = 0
-    hol = 0
-    prob = 0
-    sumwol = 0
-    inha_mowa = 0
-    cufru = 0
-    pos = 0
-    start = 0
-    sl = 0
-    lit_5 = 0
-    text = str(input("1: історія\nнапиши текст українською: ") + ' ')
-    if text == "1 ":
-        open_histori()
-        continue
-    save(text,False)
-    if text == " ":
-        print("ти нічого не написав")
-        continue
-    for i in text:
-        if i.lower() in pruholosni:
-            prh += 1
-        elif i.lower() in holosni:
-            hol += 1
-        elif i == " ":
-            prob += 1
-            if pos != start:
-                if pos - start >= 5:
-                    lit_5 += 1
-                save(text[start:pos])
-                sl += 1
-            start = pos + 1
-        elif i == "`" or i == "~" or i == "<" or i == ">" or i == "." or i == "," or i == "?" or i == "!" or i == "(" or i == ")" or i == "/" or i == "\\" or i == "*" or i == "-" or i == "+":
-            sumwol += 1
-        elif i == "1" or i == "2" or i == "3" or i == "4" or i == "5" or i == "6" or i == "7" or i == "8" or i == "9" or i == "0":
-            cufru += 1
-        else:
-            inha_mowa += 1
-        pos += 1
-    save_this = (
-        f"слів: {sl}\n"
-        f"приголосниг: {prh}\n"
-        f"голосних: {hol}\n"
-        f"пробілів: {prob}\n"
-        f"символів: {sumwol}\n"
-        f"символів і літер іншої мови: {inha_mowa}\n"
-        f"цифр: {cufru}\n"
-        f"слів в яких 5 і більше літер: {lit_5}"
-    )
-    save(save_this)
+            l.save(l.rozbir(text))
+        if menu == 3:
+            text = str(input("напиши текст українською: ") + ' ')
+            l.save(text, False)
 
+            dowhuna = int(input("напиши довжину слів для пошуку: "))
+            l.save(f"довжина для пошуку: {dowhuna}", False)
 
-
+            l.save(l.rozbir(text, dowhuna))
+        if menu == 4:
+            nazwa_faila = str(input("напиши назву файлу: "))
+            with open(nazwa_faila, "r", encoding="UTF-8") as fp:
+                info = fp.read()
+                print(info)
+                print(l.rozbir(info + " ",5))
+except ValueError as error:
+    print("це не число")
+except FileNotFoundError as error:
+    print("файл не знайдено")
 
 
