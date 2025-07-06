@@ -33,7 +33,7 @@ def rozbir(text, dowhuna = 5, zberhenny = True):
             prh += 1
         elif i.lower() in holosni:
             hol += 1
-        elif i == " ":
+        elif i == " " or i == "\n":
             prob += 1
             if pos != start:
                 if pos - start >= dowhuna:
