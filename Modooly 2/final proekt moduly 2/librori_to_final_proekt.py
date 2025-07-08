@@ -51,7 +51,7 @@ def rozbir(text, dowhuna = 5, zberhenny = True):
         pos += 1
     return (
         f"слів: {sl}\n"
-        f"приголосниг: {prh}\n"
+        f"приголосних: {prh}\n"
         f"голосних: {hol}\n"
         f"пробілів: {prob - 1}\n"
         f"символів: {sumwol}\n"
