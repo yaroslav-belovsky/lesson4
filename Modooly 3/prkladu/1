@@ -1,0 +1,99 @@
+import tkinter as tk
+
+root =
+tk.Tk
+()
+
+root.title("My super window")
+root.geometry("900x1000")
+
+label = tk.Label(root, text="⭐ Hello world!",
+                 font=("Bahnschrift", 20),
+                 fg = "green")
+
+label2 = tk.Label(root, text="My first label",
+                 font=("Times New Roman", 32),
+                 fg="green",
+                 bg="pink")
+
+label3 = tk.Label(root, text = "<Дай відкуп або я тебе взламаю>",
+                 font = ("Georgia", 32),
+                 fg = "green",
+                 bg = "black")
+
+label4 = tk.Label(root, text="My first label",
+                 font=("Times New Roman", 16), fg="green", bg="yellow")
+
+
+label.pack()
+label2.pack()
+label3.pack()
+label4.pack()
+
+counter = 0
+
+def info():
+    global counter
+    print(f"Кнопка натиснута {counter} разів")
+    counter = counter + 1
+    text = "⭐" + str(counter)
+    label = tk.Label(root, text=text,
+                     font=("Bahnschrift", 20),
+                     fg="green")
+    label.config(fg="turquoise")
+    label.pack()
+
+button = tk.Button(root, text="Натисни мене",
+                   command=info)
+button.pack()
+
+def show_text():
+    text = entry.get()
+    print(text)
+
+entry = tk.Entry(root)
+entry.pack()
+
+button2 = tk.Button(root, text="Показати текст",
+                   command=show_text)
+button2.pack()
+
+root.mainloop()
+Костянтин пише:import tkinter as tk
+
+def main():
+    root =
+tk.Tk
+()
+    root.title("Приклад фреймів з рамкою")
+
+    # Перший фрейм (угорі)
+    top_frame = tk.Frame(
+        root,
+        width=250,
+        height=120,
+        borderwidth=2,
+        relief="solid",      # тип рамки: solid, groove, ridge, sunken, raised
+        bg="#e0f7fa"         # колір фону для наочності
+    )
+    top_frame.pack(padx=10, pady=10, fill="both", expand=True)
+
+    tk.Label(top_frame, text="Верхній фрейм").pack(pady=20)
+
+    # Другий фрейм (унизу)
+    bottom_frame = tk.Frame(
+        root,
+        width=250,
+        height=120,
+        borderwidth=2,
+        relief="solid",
+        bg="#fff3e0"
+    )
+    bottom_frame.pack(padx=10, pady=(0, 10), fill="both", expand=True)
+
+    tk.Label(bottom_frame, text="Нижній фрейм").pack(pady=20)
+
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
