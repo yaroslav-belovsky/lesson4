@@ -18,4 +18,4 @@ right_button.pack(side="right", fill="y", expand=True, padx=10, pady=10)
 status = Label(root, text="А я Нижній рядок", bg="yellow", fg="black", font=("Arial", 12), padx=20, pady=10)
 status.pack(side="bottom", fill="x")
 
-root.mainloop() 
+root.mainloop()
