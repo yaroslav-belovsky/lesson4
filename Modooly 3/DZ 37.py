@@ -5,7 +5,7 @@ def f():
 root =tk.Tk()
 root.geometry("1800x900")
 root.title("вітання")
-label = tk.Label(root, font=("Arial", 30), text="напиши ім'я і натисни пиривітатись щоб я нписав привітння", fg="blue", bg="yellow")
+label = tk.Label(root, font=("Arial", 30), text="напиши ім'я і натисни привітатись, щоб я написав привітання", fg="blue", bg="yellow")
 label.pack()
 Entry = tk.Entry(root, font=("Arial", 30))
 Entry.pack()
