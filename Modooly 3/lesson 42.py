@@ -3,7 +3,7 @@ from tkinter import messagebox
 def start_clicker():
 
 # тут буде запуск клікера
-messagebox.showinfo("Auto Clicker", "Auto Clicker запушено. Натисни 'ESC' щоб зупинити.")
+    messagebox.showinfo("Auto Clicker", "Auto Clicker запушено. Натисни 'ESC' щоб зупинити.")
 # Кнопка "Почати"
 start_button = tk.Button(button_frame, text="Почати", command=start_clicker, bg="#4caf50", fg="white",
 root = tk.Tk()
