@@ -23,11 +23,14 @@ def start_clicker():
 
 
 def schedule_click():
-    sum = 0
+
+    sumv = 0
     while running:
-        sum =+ 1
+        sumv += 1
         mouse.click()  # тут потім додамо клацання миші замість print
-        Klik_label.config(text=f"Наклікано: {sum}")
+        Klik_label.config(text=f"Наклікано: {sumv}")
+        root.update()
+        print(f"Наклікано: {sumv}")
         time.sleep(delay)  # затримка між кліками
 
 
@@ -70,6 +73,10 @@ entry.pack(pady=5)
 button_frame = tk.Frame(root, bg="#989EDB")
 button_frame.pack(side=tk.BOTTOM, pady=(20, 30)) # Increase padding from the bottom
 
+Klik_label = tk.Label(root, text=f"Наклікано:", font=("Trebuchet MS", 16, "bold"), bg="#989EDB", fg="#3D41DC")
+Klik_label.pack()
+
+
 # Кнопка "Почати"
 start_button = tk.Button(button_frame, text="Почати", command=start_clicker, bg="#4caf50", fg="white", font=("Trebuchet MS", 12))
 start_button.grid(row=0, column=0, padx=10) # Add horizontal padding
@@ -77,9 +84,6 @@ start_button.grid(row=0, column=0, padx=10) # Add horizontal padding
 # Кнопка "Вийти"
 exit_button = tk.Button(button_frame, text="Вийти", command=exit_app, bg="#f44336", fg="white", font=("Trebuchet MS", 12))
 exit_button.grid(row=0, column=1, padx=10)
-
-Klik_label = tk.Label(root, text=f"Наклікано:", font=("Trebuchet MS", 16, "bold"), bg="#989EDB", fg="#3D41DC")
-Klik_label.pack()
 
 info_label = tk.Label(root, text=f"", font=("Trebuchet MS", 16, "bold"), bg="#989EDB", fg="#3D41DC")
 info_label.pack()
