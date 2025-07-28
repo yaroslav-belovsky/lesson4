@@ -1,73 +1,74 @@
 import customtkinter as ctk
 
-BTC_TO_UAH = 2000000 # Наприклад, 1 BTC = 110 0000 UAH
-ETH_TO_UAH = 112000 # Наприклад, 1 ETH = 112 000 UAH
-USDT_TO_UAH = 38 # Наприклад, 1 USDT = 38 UAH
+BTC_TO_UAH = float(2000000) # Наприклад, 1 BTC = 110 0000 UAH
+ETH_TO_UAH = float(112000) # Наприклад, 1 ETH = 112 000 UAH
+USDT_TO_UAH = float(38) # Наприклад, 1 USDT = 38 UAH
 
 def convert():
-    zn = entry_amount.get
-    from_var = from_currency_var.get
-    to_var = to_currency_var.get
+    try:
+        zn = float(entry_amount.get())
+        from_value = from_currency_var.get()
+        to_value = to_currency_var.get()
+        result = ""
 
-    if From == "BTC":
-        BTC_1 = True
-        if To == "BTC":
-            result_label.config(text="так не можна!")
+        if from_value == "BTC":
+            if to_value == "BTC":
+                result = BTC_TO_UAH / BTC_TO_UAH * zn
 
-        if To == "ETH":
-            result_label.config(text=BTC_TO_UAH / ETH_TO_UAH * zn)
+            if to_value == "ETH":
+                result = BTC_TO_UAH / ETH_TO_UAH * zn
 
-        if To == "USDT":
-            result_label.config(text=BTC_TO_UAH / USDT_TO_UAH * zn)
+            if to_value == "USDT":
+                result = BTC_TO_UAH / USDT_TO_UAH * zn
 
-        if To == "UAH":
-            result_label.config(text=zn * BTC_TO_UAH)
-
-
-    if From == "ETH":
-        if To == "BTC":
-            BTC_2 = False
-            result_label.config(text=BTC_TO_UAH / ETH_TO_UAH * zn)
-
-        if To == "ETH":
-            result_label.config(text="так не можна!")
-
-        if To == "USDT":
-            result_label.config(text=ETH_TO_UAH / USDT_TO_UAH * zn)
-
-        if To == "UAH":
-            result_label.config(text=zn * ETH_TO_UAH)
+            if to_value == "UAH":
+                result = zn * BTC_TO_UAH
 
 
-    if From == "USDT":
-        if To == "BTC":
-            BTC_2 = False
-            result_label.config(text=BTC_TO_UAH / USDT_TO_UAH * zn)
+        if from_value == "ETH":
+            if to_value == "BTC":
+                result = BTC_TO_UAH / ETH_TO_UAH * zn
 
-        if To == "ETH":
-            result_label.config(text=ETH_TO_UAH / USDT_TO_UAH * zn)
+            if to_value == "ETH":
+                result = ETH_TO_UAH / ETH_TO_UAH * zn
 
-        if To == "USDT":
-            result_label.config(text="так не можна!")
+            if to_value == "USDT":
+                result = ETH_TO_UAH / USDT_TO_UAH * zn
 
-        if To == "UAH":
-            result_label.config(text=zn * USDT_TO_UAH)
+            if to_value == "UAH":
+                result = zn * ETH_TO_UAH
 
 
-    if From == "UAH":
-        if To == "BTC":
-            BTC_2 = False
-            result_label.config(text=zn * BTC_TO_UAH)
+        if from_value == "USDT":
+            if to_value == "BTC":
+                result = BTC_TO_UAH / USDT_TO_UAH * zn
 
-        if To == "ETH":
-            result_label.config(text=zn * ETH_TO_UAH)
+            if to_value == "ETH":
+                result = ETH_TO_UAH / USDT_TO_UAH * zn
 
-        if To == "USDT":
-            result_label.config(text=zn * USDT_TO_UAH)
+            if to_value == "USDT":
+                result = USDT_TO_UAH / USDT_TO_UAH * zn
 
-        if To == "UAH":
-            result_label.config(text="так не можна!")
+            if to_value == "UAH":
+                result = zn * USDT_TO_UAH
 
+
+        if from_value == "UAH":
+            if to_value == "BTC":
+                result = zn * BTC_TO_UAH
+
+            if to_value == "ETH":
+                result = zn * ETH_TO_UAH
+
+            if to_value == "USDT":
+                result = zn * USDT_TO_UAH
+
+            if to_value == "UAH":
+                result = zn * 1
+
+        result_label.configure(text=f"{zn} {from_value} = {result} {to_value}")
+    except ValueError:
+        result_label.configure(text="це не число!")
 
 
 
@@ -103,6 +104,7 @@ convert_button.pack(pady=10)
 # Результат конвертації
 result_label = ctk.CTkLabel(app, text="Результат")
 result_label.pack(pady=10)
+
 
 # Запуск програми
 app.mainloop()
