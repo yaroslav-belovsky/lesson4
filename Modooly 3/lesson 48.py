@@ -26,6 +26,12 @@ def convert():
             if to_value == "UAH":
                 result = zn * BTC_TO_UAH
 
+            if to_value == "EURO":
+                result = BTC_TO_UAH / EURO_TO_UAH * zn
+
+            if to_value == "USD":
+                result = BTC_TO_UAH / USD_TO_UAH * zn
+
 
         if from_value == "ETH":
             if to_value == "BTC":
@@ -39,6 +45,12 @@ def convert():
 
             if to_value == "UAH":
                 result = zn * ETH_TO_UAH
+
+            if to_value == "EURO":
+                result = ETH_TO_UAH / EURO_TO_UAH * zn
+
+            if to_value == "USD":
+                result = ETH_TO_UAH / USD_TO_UAH * zn
 
 
         if from_value == "USDT":
@@ -54,6 +66,12 @@ def convert():
             if to_value == "UAH":
                 result = zn * USDT_TO_UAH
 
+            if to_value == "EURO":
+                result = EURO_TO_UAH / USDT_TO_UAH * zn
+
+            if to_value == "USD":
+                result = USD_TO_UAH / USDT_TO_UAH * zn
+
 
         if from_value == "UAH":
             if to_value == "BTC":
@@ -67,6 +85,12 @@ def convert():
 
             if to_value == "UAH":
                 result = zn * 1
+
+            if to_value == "EURO":
+                result = EURO_TO_UAH * zn
+
+            if to_value == "USD":
+                result = USD_TO_UAH * zn
 
         if from_value == "EURO":
             if to_value == "BTC":
@@ -85,24 +109,27 @@ def convert():
                 result = EURO_TO_UAH / EURO_TO_UAH * zn
 
             if to_value == "USD":
-                result = USD_TO_UAH / EURO_TO_UAH * zn
+                result = EURO_TO_UAH / USD_TO_UAH * zn
 
 
         if from_value == "USD":
             if to_value == "BTC":
-                result = zn * BTC_TO_UAH
+                result = BTC_TO_UAH / USD_TO_UAH * zn
 
             if to_value == "ETH":
-                result = zn * ETH_TO_UAH
+                result = ETH_TO_UAH / USD_TO_UAH * zn
 
             if to_value == "USDT":
-                result = zn * USDT_TO_UAH
+                result = USD_TO_UAH / USDT_TO_UAH * zn
 
             if to_value == "UAH":
-                result = USD_TO_UAH
+                result = USD_TO_UAH * zn
 
             if to_value == "EURO":
-                result = USD_TO_UAH / EURO_TO_UAH * zn
+                result = EURO_TO_UAH / USD_TO_UAH * zn
+
+            if to_value == "USD":
+                result = USD_TO_UAH / USD_TO_UAH * zn
 
 
         result_label.configure(text=f"{zn} {from_value} = {result} {to_value}")
