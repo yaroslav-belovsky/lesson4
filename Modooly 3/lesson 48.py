@@ -1,4 +1,6 @@
 import customtkinter as ctk
+from tkinter import messagebox
+import tkinter as tk
 
 BTC_TO_UAH = float(2000000) # Наприклад, 1 BTC = 110 0000 UAH
 ETH_TO_UAH = float(112000) # Наприклад, 1 ETH = 112 000 UAH
@@ -12,7 +14,6 @@ def convert():
         from_value = from_currency_var.get()
         to_value = to_currency_var.get()
         result = ""
-
         if from_value == "BTC":
             if to_value == "BTC":
                 result = BTC_TO_UAH / BTC_TO_UAH * zn
@@ -35,7 +36,7 @@ def convert():
 
         if from_value == "ETH":
             if to_value == "BTC":
-                result = BTC_TO_UAH / ETH_TO_UAH * zn
+                result = ETH_TO_UAH / BTC_TO_UAH * zn
 
             if to_value == "ETH":
                 result = ETH_TO_UAH / ETH_TO_UAH * zn
@@ -55,10 +56,10 @@ def convert():
 
         if from_value == "USDT":
             if to_value == "BTC":
-                result = BTC_TO_UAH / USDT_TO_UAH * zn
+                result = USDT_TO_UAH / BTC_TO_UAH * zn
 
             if to_value == "ETH":
-                result = ETH_TO_UAH / USDT_TO_UAH * zn
+                result = USDT_TO_UAH / ETH_TO_UAH * zn
 
             if to_value == "USDT":
                 result = USDT_TO_UAH / USDT_TO_UAH * zn
@@ -67,37 +68,37 @@ def convert():
                 result = zn * USDT_TO_UAH
 
             if to_value == "EURO":
-                result = EURO_TO_UAH / USDT_TO_UAH * zn
+                result = USDT_TO_UAH / EURO_TO_UAH * zn
 
             if to_value == "USD":
-                result = USD_TO_UAH / USDT_TO_UAH * zn
+                result = USDT_TO_UAH / USD_TO_UAH * zn
 
 
         if from_value == "UAH":
             if to_value == "BTC":
-                result = zn * BTC_TO_UAH
+                result = zn / BTC_TO_UAH
 
             if to_value == "ETH":
-                result = zn * ETH_TO_UAH
+                result = zn / ETH_TO_UAH
 
             if to_value == "USDT":
-                result = zn * USDT_TO_UAH
+                result = zn / USDT_TO_UAH
 
             if to_value == "UAH":
                 result = zn * 1
 
             if to_value == "EURO":
-                result = EURO_TO_UAH * zn
+                result = zn / EURO_TO_UAH
 
             if to_value == "USD":
-                result = USD_TO_UAH * zn
+                result = zn / USD_TO_UAH
 
         if from_value == "EURO":
             if to_value == "BTC":
-                result = BTC_TO_UAH / EURO_TO_UAH * zn
+                result = EURO_TO_UAH / BTC_TO_UAH * zn
 
             if to_value == "ETH":
-                result = ETH_TO_UAH / EURO_TO_UAH * zn
+                result = EURO_TO_UAH / ETH_TO_UAH * zn
 
             if to_value == "USDT":
                 result = EURO_TO_UAH / USDT_TO_UAH * zn
@@ -114,10 +115,10 @@ def convert():
 
         if from_value == "USD":
             if to_value == "BTC":
-                result = BTC_TO_UAH / USD_TO_UAH * zn
+                result = USD_TO_UAH / BTC_TO_UAH * zn
 
             if to_value == "ETH":
-                result = ETH_TO_UAH / USD_TO_UAH * zn
+                result = USD_TO_UAH / ETH_TO_UAH * zn
 
             if to_value == "USDT":
                 result = USD_TO_UAH / USDT_TO_UAH * zn
@@ -126,7 +127,7 @@ def convert():
                 result = USD_TO_UAH * zn
 
             if to_value == "EURO":
-                result = EURO_TO_UAH / USD_TO_UAH * zn
+                result = USD_TO_UAH / EURO_TO_UAH * zn
 
             if to_value == "USD":
                 result = USD_TO_UAH / USD_TO_UAH * zn
@@ -136,6 +137,8 @@ def convert():
     except ValueError:
         result_label.configure(text="це не число!")
 
+def key_i(event):
+    messagebox.showinfo("info", "Це конвертор валют, він конвертне валюти які ти скажеш! В першій випадушці вкажи з чого, а в другій в що перевести. Не забуть написати кількість валюти з якої береводити зверху!")
 
 
 
@@ -144,13 +147,14 @@ def convert():
 app = ctk.CTk()
 app.title("Конвертер криптовалют")
 app.geometry("400x300")
+app.config(background="DarkSeaGreen1")
 
 # Заголовок
-title_label = ctk.CTkLabel(app, text="Конвертер криптовалют", font=("Roboto", 18))
+title_label = ctk.CTkLabel(app, text="Конвертер валют", font=("Roboto", 18), fg_color="DarkSeaGreen1", text_color="gray10")
 title_label.pack(pady=10)
 
 # Поле для вводу суми
-entry_amount = ctk.CTkEntry(app, placeholder_text="Введи суму")
+entry_amount = ctk.CTkEntry(app, placeholder_text="Введи суму", fg_color="sea green")
 entry_amount.pack(pady=10)
 
 # Вибір валюти для конвертації з
@@ -168,9 +172,12 @@ convert_button = ctk.CTkButton(app, text="Конвертувати", command=con
 convert_button.pack(pady=10)
 
 # Результат конвертації
-result_label = ctk.CTkLabel(app, text="Результат")
+result_label = ctk.CTkLabel(app, text="Результат", fg_color="DarkSeaGreen1", text_color="gray10")
 result_label.pack(pady=10)
 
+
+
+app.bind('i', key_i)
 
 # Запуск програми
 app.mainloop()
