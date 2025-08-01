@@ -1,9 +1,25 @@
 import tkinter as tk
-
+current_expression = ""
 # Це буде функція для обробки натискання кнопок(поки що вона порожня):
 def on_button_click(button):
+    global current_expression
 
-    pass
+    if button == "=":
+
+        display.delete(0, tk.END)
+        display.insert(tk.END, eval(f"{current_expression}"))
+
+    elif button == "C":
+        current_expression = ""
+        display.delete(0, tk.END)
+
+    elif button == "xⁿ":
+        current_expression += "**"
+        display.insert(tk.END, str("^"))
+
+    else:
+        current_expression += str(button)
+        display.insert(tk.END, str(button))
 
 
 # Функція для зміни теми:
@@ -40,7 +56,7 @@ def set_theme(theme):
 # Головне вікно
 root = tk.Tk()
 root.title("Калькулятор")
-root.geometry("390x370")
+root.geometry("390x440")
 root.resizable(False, False)
 
 display = tk.Entry(root, font=('Arial', 24), justify='right')
@@ -49,11 +65,11 @@ display.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
 # Кнопки калькулятора
 buttons = []
 button_texts = [
-
-    '7', '8', '9', '/',
-    '4', '5', '6', '*',
-    '1', '2', '3', '-',
-    'C', '0', '=', '+'
+    '/', '*', '-', '+',
+    '7', '8', '9', 'xⁿ',
+    '4', '5', '6', '.',
+    '1', '2', '3', '(',
+    'C', '0', '=', ')'
 
 ]
 
