@@ -175,10 +175,12 @@ theme_menu.add_command(label="Світла тема", command=lambda: prewirka("
 theme_menu.add_command(label="Темна тема", command=lambda: prewirka("dark"))
 theme_menu.add_command(label="Червона тема", command=lambda: prewirka("red"))
 theme_menu.add_command(label="Синя тема", command=lambda: prewirka("blue"))
+
 theme_menu2 = tk.Menu(menubar, tearoff=0, bg="black", fg="white")
 theme_menu2.add_command(label="історія", command=lambda: prewirka("istoria"))
 theme_menu2.add_command(label="режим розбір тексту", command=lambda: prewirka("ros_re"))
 theme_menu2.add_command(label="режим розібрати файл", command=lambda: prewirka("ros_fail"))
+
 menubar.add_cascade(label="теми", menu=theme_menu)
 menubar.add_cascade(label="режими", menu=theme_menu2)
 root.config(menu=menubar)
