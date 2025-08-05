@@ -8,12 +8,13 @@ def save(content, echo = True):
 def open_histori():
     with open("istoria", "r", encoding="UTF-8") as fp:
         info = fp.read()
-        return "історія:\n", info, "\n"
+        return f"історія:\n, {info}, \n"
 
-def rozbir(text, dowhuna = 5, zberhenny = True):
+def rozbir(text, dowhuna = 5, zberhenny = True, f = False):
     pruholosni = ["б", "в", "г", "ґ", "д", "ж", "з", "й", "к", "л", "м", "н", "п", "р", "с", "т", "ф", "х", "ц", "ч",
                   "ш", "щ", "ь"]
     holosni = ["а", "о", "у", "е", "и", "і", "я", "ю", "є", "ї"]
+    text += " "
     prh = 0
     hol = 0
     prob = 0
@@ -24,6 +25,7 @@ def rozbir(text, dowhuna = 5, zberhenny = True):
     start = 0
     sl = 0
     lit_5 = 0
+    widpowid = ""
     if text == " ":
         print("ти нічого не написав")
         return False
@@ -39,6 +41,8 @@ def rozbir(text, dowhuna = 5, zberhenny = True):
                     lit_5 += 1
                 if zberhenny:
                     save(text[start:pos])
+                    widpowid += text[start:pos]
+                    widpowid += "\n"
                 sl += 1
             start = pos + 1
         elif i == "`" or i == "~" or i == "<" or i == ">" or i == "." or i == "," or i == "?" or i == "!" or i == "(" or i == ")" or i == "/" or i == "\\" or i == "*" or i == "-" or i == "+":
@@ -48,13 +52,26 @@ def rozbir(text, dowhuna = 5, zberhenny = True):
         else:
             inha_mowa += 1
         pos += 1
-    return (
-        f"слів: {sl}\n"
-        f"приголосних: {prh}\n"
-        f"голосних: {hol}\n"
-        f"пробілів: {prob - 1}\n"
-        f"символів: {sumwol}\n"
-        f"символів і літер іншої мови: {inha_mowa}\n"
-        f"цифр: {cufru}\n"
-        f"слів в яких {dowhuna} і більше літер: {lit_5}"
-    )
+    if f:
+        widpowid += (
+            f"слів: {sl}\n"
+            f"приголосних: {prh}\n"
+            f"голосних: {hol}\n"
+            f"пробілів: {prob - 1}\n"
+            f"символів: {sumwol}\n"
+            f"символів і літер іншої мови: {inha_mowa}\n"
+            f"цифр: {cufru}\n"
+            f"слів в яких {dowhuna} і більше літер: {lit_5}"
+        )
+    else:
+        widpowid += (
+            f"слів: {sl}\n"
+            f"приголосних: {prh}\n"
+            f"голосних: {hol}\n"
+            f"пробілів: {prob - 2}\n"
+            f"символів: {sumwol}\n"
+            f"символів і літер іншої мови: {inha_mowa}\n"
+            f"цифр: {cufru}\n"
+            f"слів в яких {dowhuna} і більше літер: {lit_5}"
+        )
+    return widpowid
