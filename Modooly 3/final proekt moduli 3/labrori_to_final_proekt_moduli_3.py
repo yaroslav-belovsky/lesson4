@@ -37,7 +37,7 @@ def rozbir(text, dowhuna = 5, zberhenny = True, f = False):
         elif i == " " or i == "\n":
             prob += 1
             if pos != start:
-                if pos - start >= dowhuna:
+                if pos - start >= int(dowhuna):
                     lit_5 += 1
                 if zberhenny:
                     save(text[start:pos])
